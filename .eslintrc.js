@@ -1,7 +1,11 @@
 module.exports = {
     plugins: [
         "matrix-org",
+        // --DTM-- ADDED
+        "@typescript-eslint",
     ],
+    // --DTM-- ADDED
+    parser: "@typescript-eslint/parser",
     extends: [
         "plugin:matrix-org/babel",
         "plugin:matrix-org/react",
@@ -15,6 +19,9 @@ module.exports = {
         LANGUAGES_FILE: "readonly",
     },
     rules: {
+        // --DTM-- ADDED
+        "linebreak-style": 0,
+
         // Things we do that break the ideal style
         "no-constant-condition": "off",
         "prefer-promise-reject-errors": "off",
@@ -145,12 +152,12 @@ module.exports = {
                 "src/components/views/rooms/MessageComposer.tsx",
                 "src/components/views/rooms/ReplyPreview.tsx",
                 "src/components/views/settings/tabs/room/SecurityRoomSettingsTab.tsx",
-                "src/components/views/settings/tabs/user/GeneralUserSettingsTab.tsx"
+                "src/components/views/settings/tabs/user/GeneralUserSettingsTab.tsx",
             ],
             rules: {
                 "@typescript-eslint/no-var-requires": "off",
             },
-        }
+        },
     ],
     settings: {
         react: {

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2020, 2021 The Matrix.org Foundation C.I.C.
 
@@ -34,7 +35,7 @@ import SettingsStore from "../../settings/SettingsStore";
 import { findHighContrastTheme, getCustomTheme, isHighContrastTheme } from "../../theme";
 import {
     RovingAccessibleButton,
-    RovingAccessibleTooltipButton,
+    // RovingAccessibleTooltipButton, --DTM-- removed unused reference
     useRovingTabIndex,
 } from "../../accessibility/RovingTabIndex";
 import AccessibleButton, { ButtonEvent } from "../views/elements/AccessibleButton";
@@ -485,13 +486,15 @@ export default class UserMenu extends React.Component<IProps, IState> {
                     <span className="mx_UserMenu_contextMenu_displayName">
                         { OwnProfileStore.instance.displayName }
                     </span>
+                    { /* --DTM-- Removed last part of userId (after the ":") */ }
                     <span className="mx_UserMenu_contextMenu_userId">
                         { UserIdentifierCustomisations.getDisplayUserIdentifier(
-                            MatrixClientPeg.get().getUserId(), { withDisplayName: true }) }
+                            MatrixClientPeg.get().getUserId(), { withDisplayName: true }).split(':')[0] }
                     </span>
                 </div>
 
-                <RovingAccessibleTooltipButton
+                { /* --DTM-- Removed change theme button */ }
+                { /* <RovingAccessibleTooltipButton
                     className="mx_UserMenu_contextMenu_themeButton"
                     onClick={this.onSwitchThemeClick}
                     title={this.state.isDarkTheme ? _t("Switch to light mode") : _t("Switch to dark mode")}
@@ -501,7 +504,7 @@ export default class UserMenu extends React.Component<IProps, IState> {
                         alt={_t("Switch theme")}
                         width={16}
                     />
-                </RovingAccessibleTooltipButton>
+                </RovingAccessibleTooltipButton> */ }
             </div>
             { customStatusSection }
             { topSection }

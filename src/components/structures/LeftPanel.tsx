@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2020 The Matrix.org Foundation C.I.C.
 
@@ -367,11 +368,12 @@ export default class LeftPanel extends React.Component<IProps, IState> {
         if (this.state.showBreadcrumbs === BreadcrumbsMode.Labs) {
             rightButton = <RecentlyViewedButton />;
         } else if (this.state.activeSpace === MetaSpace.Home && shouldShowComponent(UIComponent.ExploreRooms)) {
-            rightButton = <AccessibleTooltipButton
-                className="mx_LeftPanel_exploreButton"
-                onClick={this.onExplore}
-                title={_t("Explore rooms")}
-            />;
+            // --DTM-- Removed "explore rooms" button
+            // rightButton = <AccessibleTooltipButton
+            //     className="mx_LeftPanel_exploreButton"
+            //     onClick={this.onExplore}
+            //     title={_t("Explore rooms")}
+            // />;
         }
 
         return (

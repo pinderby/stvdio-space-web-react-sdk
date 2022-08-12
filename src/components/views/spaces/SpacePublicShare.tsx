@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2021 The Matrix.org Foundation C.I.C.
 
@@ -41,7 +42,8 @@ const SpacePublicShare = ({ space, onFinished }: IProps) => {
             onClick={async () => {
                 const permalinkCreator = new RoomPermalinkCreator(space);
                 permalinkCreator.load();
-                const success = await copyPlaintext(permalinkCreator.forShareableRoom());
+                // --DTM-- hack to change the space links to go to the proper domain
+                const success = await copyPlaintext(permalinkCreator.forShareableRoom().replace("matrix.to/#", "space.stvd.io/#/room"));
                 const text = success ? _t("Copied!") : _t("Failed to copy");
                 setCopiedText(text);
                 await sleep(5000);

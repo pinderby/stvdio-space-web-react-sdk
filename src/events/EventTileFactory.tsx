@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2022 The Matrix.org Foundation C.I.C.
 
@@ -232,11 +233,15 @@ export function pickFactory(
         }
 
         return STATE_EVENT_TILE_TYPES[evType] ?? noEventFactoryFactory();
+        // --DTM-- Test hiding all state events
+        // return noEventFactoryFactory();
     }
 
     // Blanket override for all events. The MessageEvent component handles redacted states for us.
     if (mxEvent.isRedacted()) {
-        return MessageEventFactory;
+        // return MessageEventFactory;
+        // --DTM-- Updated not to render deleted messages
+        return noEventFactoryFactory();
     }
 
     if (mxEvent.isRelation(RelationType.Replace)) {

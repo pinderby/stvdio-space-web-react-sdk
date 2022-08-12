@@ -184,7 +184,7 @@ $pulse-color: $alert;
 .mx_RightPanel_headerButton_highlight,
 .mx_RightPanel_headerButton:hover {
     &::before {
-        background-color: $accent !important;
+        background-color: $accent; // --DTM-- Removed !important
     }
 }
 

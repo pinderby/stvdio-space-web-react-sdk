@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2015-2021 The Matrix.org Foundation C.I.C.
 
@@ -33,7 +34,7 @@ import PasswordLogin from "../../views/auth/PasswordLogin";
 import InlineSpinner from "../../views/elements/InlineSpinner";
 import Spinner from "../../views/elements/Spinner";
 import SSOButtons from "../../views/elements/SSOButtons";
-import ServerPicker from "../../views/elements/ServerPicker";
+// import ServerPicker from "../../views/elements/ServerPicker"; --DTM-- Removed unused import
 import AuthBody from "../../views/auth/AuthBody";
 import AuthHeader from "../../views/auth/AuthHeader";
 import AccessibleButton from '../../views/elements/AccessibleButton';
@@ -605,10 +606,11 @@ export default class LoginComponent extends React.PureComponent<IProps, IState> 
                     </h2>
                     { errorTextSection }
                     { serverDeadSection }
+                    { /* --DTM-- Removed ServerPicker
                     <ServerPicker
                         serverConfig={this.props.serverConfig}
                         onServerConfigChange={this.props.onServerConfigChange}
-                    />
+                    /> */ }
                     { this.renderLoginComponentForFlows() }
                     { footer }
                 </AuthBody>

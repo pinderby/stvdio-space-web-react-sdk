@@ -234,6 +234,57 @@ limitations under the License.
     mask-image: url('$(res)/img/element-icons/call/video-call.svg');
 }
 
+// --DTM-- CHANGED
+// Left Panel Toggle
+@media only screen and (max-width: 760px) {
+    .mx_RoomHeader {
+
+        .mx_RoomHeader_left_panel_toggle {
+            // position: absolute;
+            background-color: rgba(141, 151, 165, 0.2);
+            height: 20px;
+            width: 20px;
+            // margin: 12px;
+            top: 0;
+            border-radius: 50%;
+            margin-left: 10px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                height: inherit;
+                width: inherit;
+                top: 12px;
+                left: 9px;
+                mask-repeat: no-repeat;
+                mask-position: center;
+                background-color: $header-panel-text-primary-color;
+            }
+        }
+
+        .mx_RoomHeader_left_panel_toggle_open {
+            left: 0;
+
+            &::before {
+                transform: rotate(90deg);
+                mask-size: 22px;
+                mask-image: url('$(res)/img/feather-customised/chevron-down.svg');
+            }
+        }
+
+        .mx_RoomHeader_left_panel_toggle_closed {
+            left: 0;
+
+            &::before {
+                transform: translate(1px) rotate(270deg);
+                mask-size: 22px;
+                mask-image: url('$(res)/img/feather-customised/chevron-down.svg');
+            }
+        }
+    }
+}
+// END CHANGES
+
 @media only screen and (max-width: 480px) {
     .mx_RoomHeader_wrapper {
         padding: 0;

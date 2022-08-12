@@ -593,6 +593,163 @@ legend {
     color: $username-variant8-color;
 }
 
+/* --DTM-- CHANGED */
+.mx_AuthPage_modal {
+    margin: auto !important;
+}
+
+.mx_ButtonCreateAccount, .mx_Login_submit {
+    background-color: #8454eb !important;
+    color: white !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_kind_link, 
+.mx_AccessibleButton.mx_AccessibleButton_kind_link_inline {
+    color: #8454eb !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_kind_primary {
+    color: #ffffff;
+    background-color: #8454eb !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_kind_primary, .mx_AccessibleButton.mx_AccessibleButton_kind_primary_outline {
+    border: 1px solid #8454eb !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_kind_primary_outline {
+    color: #8454eb !important;
+    background-color: transparent;
+}
+
+.mx_AnalyticsToast .mx_AccessibleButton_kind_danger_outline {
+    background-color: #8454eb !important;
+    color: #ffffff;
+    border: 1px solid #8454eb !important;
+}
+
+.mx_TabbedView_tabsOnLeft .mx_TabbedView_tabLabel_active {
+    background-color: #8454eb !important;
+    color: #ffffff;
+}
+
+.mx_LayoutSwitcher .mx_LayoutSwitcher_RadioButtons > .mx_LayoutSwitcher_RadioButton.mx_LayoutSwitcher_RadioButton_selected {
+    border-color: #8454eb !important;
+}
+
+.mx_StyledRadioButton_checked {
+    border-color: #8454eb !important;
+}
+
+.mx_Username_color3 {
+    color: #eee !important;
+}
+
+.mx_AppearanceUserSettingsTab_Advanced .mx_AppearanceUserSettingsTab_AdvancedToggle {
+    color: #8454eb !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_hasKind.mx_AccessibleButton_kind_primary_sm {
+    color: #ffffff;
+    background-color: #8454eb !important;
+}
+
+.mx_InlineTermsAgreement_cbContainer a {
+    color: #8454eb !important;
+    text-decoration: none;
+}
+
+.mx_StyledRadioButton input[type=radio]:checked + div > div {
+    background: #8454eb !important;
+}
+
+.mx_StyledRadioButton input[type=radio]:checked + div {
+    border-color: #8454eb !important;
+}
+
+.mx_SettingsTab_linkBtn {
+    color: #8454eb !important;
+}
+
+.mx_AccessibleButton.mx_AccessibleButton_kind_secondary {
+    color: #8454eb !important;
+}
+
+.mx_HomePage_default .mx_HomePage_default_buttons .mx_AccessibleButton {
+    background-color: #8454eb !important;
+}
+
+.mx_IconizedContextMenu .mx_IconizedContextMenu_active.mx_IconizedContextMenu_item, .mx_IconizedContextMenu .mx_IconizedContextMenu_active .mx_IconizedContextMenu_item {
+    color: #8454eb !important;
+}
+
+.mx_Slider_selectionDot, .mx_Slider_dotActive {
+    background-color: #8454eb !important;
+}
+
+.mx_Slider_selection > hr {
+    border: 0.2em solid #8454eb !important;
+}
+
+.mx_MessageComposer_button:hover::before, .mx_MessageComposer_button.mx_MessageComposer_closeButtonMenu::before {
+    background-color: #8454eb !important;
+}
+
+.mx_GenericEventListSummary_toggle,
+.mx_UserInfo.mx_BaseCard .mx_UserInfo_field,
+.mx_linkButton,
+.mx_UserInfo.mx_BaseCard .mx_UserInfo_devices .mx_UserInfo_device.mx_UserInfo_device_verified .mx_UserInfo_device_trusted, 
+.mx_FeedbackDialog .mx_FeedbackDialog_section .mx_AccessibleButton_kind_link, 
+.mx_FeedbackDialog .mx_FeedbackDialog_section a {
+    color: #8454eb !important;
+}
+
+.mx_RightPanel_headerButton:hover, .mx_RoomHeader_button:hover {
+    background: rgba(132, 84, 235, 0.1) !important;
+}
+
+.mx_RightPanel_headerButton_highlight::before, 
+.mx_RightPanel_headerButton:hover::before,
+.mx_RoomHeader_button:hover::before,
+.mx_SpacePublicShare .mx_AccessibleButton:hover:before,
+.mx_SpaceCreateMenu_wrapper .mx_ContextualMenu .mx_SpaceCreateMenuType:hover:before {
+    background-color: #8454eb !important;
+}
+
+.mx_SpacePublicShare .mx_AccessibleButton:hover,
+.mx_SpaceCreateMenu_wrapper .mx_ContextualMenu .mx_SpaceCreateMenuType:hover {
+    border-color: #8454eb !important;
+}
+
+.mx_Dialog_buttons button.mx_Dialog_primary:not(.mx_Dialog_nonDialogButton):not(.mx_AccessibleButton), 
+.mx_Dialog_buttons input[type=submit].mx_Dialog_primary, 
+.mx_Dialog button.mx_Dialog_primary:not(.mx_Dialog_nonDialogButton):not([class|=maplibregl]), 
+.mx_Dialog input[type=submit].mx_Dialog_primary {
+    background-color: #8454eb !important;
+}
+
+.mx_Dialog_buttons button:not(.mx_Dialog_nonDialogButton):not(.mx_AccessibleButton), 
+.mx_Dialog_buttons input[type=submit], 
+.mx_Dialog button:not(.mx_Dialog_nonDialogButton):not([class|=maplibregl]):not(.mx_AccessibleButton), 
+.mx_Dialog input[type=submit] {
+    background-color: #8454eb !important;
+    border: 1px solid #8454eb !important;
+    color: #fff !important;
+}
+
+.mx_RoomView_pullRight {
+    margin-right: -200px;
+}
+
+.mx_LeftPanel_outerWrapper_mobile {
+    // margin-left: -136px;
+}
+
+.display-none {
+    display: none !important;
+}
+/* END CHANGES */
+
 @define-mixin mx_Tooltip_dark {
     box-shadow: none;
     background-color: $tooltip-timeline-bg-color;

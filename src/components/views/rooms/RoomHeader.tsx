@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2015, 2016 OpenMarket Ltd
 Copyright 2019, 2021 The Matrix.org Foundation C.I.C.
@@ -41,6 +42,7 @@ import { RightPanelPhases } from '../../../stores/right-panel/RightPanelStorePha
 import { NotificationStateEvents } from '../../../stores/notifications/NotificationState';
 import RoomContext from "../../../contexts/RoomContext";
 import RoomLiveShareWarning from '../beacon/RoomLiveShareWarning';
+import AccessibleButton from "../../views/elements/AccessibleButton";
 
 export interface ISearchInfo {
     searchTerm: string;
@@ -61,6 +63,9 @@ interface IProps {
     appsShown: boolean;
     searchInfo: ISearchInfo;
     excludedRightPanelPhaseButtons?: Array<RightPanelPhases>;
+    // --DTM-- Added to manage left panel state
+    toggleLeftPanel: () => void;
+    isLeftPanelOpen: boolean;
 }
 
 interface IState {
@@ -273,9 +278,21 @@ export default class RoomHeader extends React.Component<IProps, IState> {
 
         const e2eIcon = this.props.e2eStatus ? <E2EIcon status={this.props.e2eStatus} /> : undefined;
 
+        // --DTM-- Added to manage left panel state (for header button)
+        const leftPanelToggleClasses = classNames({
+            'mx_RoomHeader_left_panel_toggle': true,
+            'mx_RoomHeader_left_panel_toggle_open': this.props.isLeftPanelOpen,
+            'mx_RoomHeader_left_panel_toggle_closed': !this.props.isLeftPanelOpen,
+        });
+
+        // --DTM-- Added left panel collapse button on mobile
         return (
             <div className="mx_RoomHeader light-panel">
                 <div className="mx_RoomHeader_wrapper" aria-owns="mx_RightPanel">
+                    <AccessibleButton
+                        className={leftPanelToggleClasses}
+                        onClick={this.props.toggleLeftPanel}
+                        title="Toggle Left Panel" />
                     <div className="mx_RoomHeader_avatar">{ roomAvatar }</div>
                     <div className="mx_RoomHeader_e2eIcon">{ e2eIcon }</div>
                     { name }

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2020 The Matrix.org Foundation C.I.C.
 
@@ -102,7 +103,8 @@ const HomePage: React.FC<IProps> = ({ justRegistered = false }) => {
         introSection = <UserWelcomeTop />;
     } else {
         const brandingConfig = SdkConfig.getObject("branding");
-        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? "themes/element/img/logos/element-logo.svg";
+        // --DTM-- changed to STVDIO logo
+        const logoUrl = brandingConfig?.get("auth_header_logo_url") ?? "themes/element/img/logos/STVDIO_logo.svg";
 
         introSection = <React.Fragment>
             <img src={logoUrl} alt={config.brand} />

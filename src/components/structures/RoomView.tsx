@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2015, 2016 OpenMarket Ltd
 Copyright 2017 Vector Creations Ltd
@@ -130,6 +131,11 @@ interface IRoomProps extends MatrixClientProps {
 
     // Called with the credentials of a registered user (if they were a ROU that transitioned to PWLU)
     onRegistered?(credentials: IMatrixClientCreds): void;
+
+    // --DTM-- Used to manage left panel state
+    toggleLeftPanel?(): void;
+    isLeftPanelOpen?: boolean;
+    isMobile?: boolean;
 }
 
 // This defines the content of the mainSplit.
@@ -1778,13 +1784,21 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
     };
 
     render() {
+        // console.log("this.props.isLeftPanelOpen && this.props.isMobile", this.props.isLeftPanelOpen, this.props.isMobile);
+        // --DTM-- Added to manage left panel state
+        const roomViewClasses = classNames({
+            'mx_RoomView': true,
+            'mx_RoomView_pullRight': this.props.isLeftPanelOpen && this.props.isMobile,
+        });
+
         if (!this.state.room) {
             const loading = !this.state.matrixClientIsReady || this.state.roomLoading || this.state.peekLoading;
             if (loading) {
                 // Assume preview loading if we don't have a ready client or a room ID (still resolving the alias)
                 const previewLoading = !this.state.matrixClientIsReady || !this.state.roomId || this.state.peekLoading;
+                // --DTM-- Updated class names to be dynamic
                 return (
-                    <div className="mx_RoomView">
+                    <div className={roomViewClasses}>
                         <ErrorBoundary>
                             <RoomPreviewBar
                                 canPreview={false}
@@ -1807,8 +1821,9 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                 // We have no room object for this room, only the ID.
                 // We've got to this room by following a link, possibly a third party invite.
                 const roomAlias = this.state.roomAlias;
+                // --DTM-- Updated class names to be dynamic
                 return (
-                    <div className="mx_RoomView">
+                    <div className={roomViewClasses}>
                         <ErrorBoundary>
                             <RoomPreviewBar
                                 onJoinClick={this.onJoinButtonClicked}
@@ -1858,8 +1873,9 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                 // XXX: in future we could give the option of a 'Preview' button which lets them view anyway.
 
                 // We have a regular invite for this room.
+                // --DTM-- Updated class names to be dynamic
                 return (
-                    <div className="mx_RoomView">
+                    <div className={roomViewClasses}>
                         <ErrorBoundary>
                             <RoomPreviewBar
                                 onJoinClick={this.onJoinButtonClicked}
@@ -1964,8 +1980,9 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                 />
             );
             if (!this.state.canPeek && !this.state.room?.isSpaceRoom()) {
+                // --DTM-- Updated class names to be dynamic
                 return (
-                    <div className="mx_RoomView">
+                    <div className={roomViewClasses}>
                         { previewBar }
                     </div>
                 );
@@ -2127,6 +2144,8 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
         const mainClasses = classNames("mx_RoomView", {
             mx_RoomView_inCall: Boolean(activeCall),
             mx_RoomView_immersive: this.state.mainSplitContentType === MainSplitContentType.Video,
+            // --DTM-- Added to manage left panel state
+            mx_RoomView_pullRight: this.props.isLeftPanelOpen && this.props.isMobile,
         });
 
         const showChatEffects = SettingsStore.getValue('showChatEffects');
@@ -2230,6 +2249,8 @@ export class RoomView extends React.Component<IRoomProps, IRoomState> {
                             appsShown={this.state.showApps}
                             onCallPlaced={onCallPlaced}
                             excludedRightPanelPhaseButtons={excludedRightPanelPhaseButtons}
+                            toggleLeftPanel={this.props.toggleLeftPanel}
+                            isLeftPanelOpen={this.props.isLeftPanelOpen}
                         />
                         <MainSplit panel={rightPanel} resizeNotifier={this.props.resizeNotifier}>
                             <div className={mainSplitContentClasses} ref={this.roomViewBody} data-layout={this.state.layout}>

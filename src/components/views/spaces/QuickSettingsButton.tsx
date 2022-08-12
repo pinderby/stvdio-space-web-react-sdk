@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2021 The Matrix.org Foundation C.I.C.
 
@@ -28,7 +29,7 @@ import { onMetaSpaceChangeFactory } from "../settings/tabs/user/SidebarUserSetti
 import defaultDispatcher from "../../../dispatcher/dispatcher";
 import { Action } from "../../../dispatcher/actions";
 import { UserTab } from "../dialogs/UserTab";
-import QuickThemeSwitcher from "./QuickThemeSwitcher";
+// import QuickThemeSwitcher from "./QuickThemeSwitcher"; --DTM-- Removed unused import
 import { Icon as PinUprightIcon } from '../../../../res/img/element-icons/room/pin-upright.svg';
 import { Icon as EllipsisIcon } from '../../../../res/img/element-icons/room/ellipsis.svg';
 import { Icon as MembersIcon } from '../../../../res/img/element-icons/room/members.svg';
@@ -117,7 +118,7 @@ const QuickSettingsButton = ({ isPanelCollapsed = false }) => {
                 { _t("More options") }
             </AccessibleButton>
 
-            <QuickThemeSwitcher requestClose={closeMenu} />
+            { /* --DTM-- Removed ability to change theme <QuickThemeSwitcher requestClose={closeMenu} /> */ }
         </ContextMenu>;
     }
 

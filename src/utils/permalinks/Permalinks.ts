@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2019, 2021 The Matrix.org Foundation C.I.C.
 
@@ -24,6 +25,8 @@ import { MatrixClientPeg } from "../../MatrixClientPeg";
 import MatrixToPermalinkConstructor, { baseUrl as matrixtoBaseUrl } from "./MatrixToPermalinkConstructor";
 import PermalinkConstructor, { PermalinkParts } from "./PermalinkConstructor";
 import ElementPermalinkConstructor from "./ElementPermalinkConstructor";
+// --DTM-- commented for now due to issues with internal links
+// import StvdioSpacePermalinkConstructor from "./StvdioSpacePermalinkConstructor";
 import SdkConfig from "../../SdkConfig";
 import { ELEMENT_URL_PATTERN } from "../../linkify-matrix";
 import MatrixSchemePermalinkConstructor from "./MatrixSchemePermalinkConstructor";
@@ -286,7 +289,8 @@ export function makeRoomPermalink(roomId: string): string {
     }
     const permalinkCreator = new RoomPermalinkCreator(room);
     permalinkCreator.load();
-    return permalinkCreator.forShareableRoom();
+    // --DTM-- hack to make room links go to the right domain
+    return permalinkCreator.forShareableRoom().replace("matrix.to/#", "space.stvd.io/#/room");
 }
 
 export function makeGroupPermalink(groupId: string): string {
@@ -419,6 +423,9 @@ function getPermalinkConstructor(): PermalinkConstructor {
     }
 
     return new MatrixToPermalinkConstructor();
+
+    // --DTM-- Force use of the STVDIO Space domain
+    // return new StvdioSpacePermalinkConstructor();
 }
 
 export function parsePermalink(fullUrl: string): PermalinkParts {

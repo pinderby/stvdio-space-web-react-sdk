@@ -484,6 +484,11 @@ export default class MessagePanel extends React.Component<IProps, IState> {
             return false; // no tile = no show
         }
 
+        // --DTM-- Don't show state events in rooms where you can't sent messages (read-only)
+        if (mxEv.isState() && !this.context?.canSendMessages) {
+            return false;
+        }
+
         // Always show highlighted event
         if (this.props.highlightedEventId === mxEv.getId()) return true;
 

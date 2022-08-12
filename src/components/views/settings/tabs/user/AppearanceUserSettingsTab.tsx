@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2019 New Vector Ltd
 Copyright 2019 - 2021 The Matrix.org Foundation C.I.C.
@@ -28,7 +29,7 @@ import { UIFeature } from "../../../../../settings/UIFeature";
 import { Layout } from "../../../../../settings/enums/Layout";
 import LayoutSwitcher from "../../LayoutSwitcher";
 import FontScalingPanel from '../../FontScalingPanel';
-import ThemeChoicePanel from '../../ThemeChoicePanel';
+// import ThemeChoicePanel from '../../ThemeChoicePanel'; --DTM-- Removed unused import
 import ImageSizePanel from "../../ImageSizePanel";
 
 interface IProps {
@@ -145,7 +146,7 @@ export default class AppearanceUserSettingsTab extends React.Component<IProps, I
                 <div className="mx_SettingsTab_SubHeading">
                     { _t("Appearance Settings only affect this %(brand)s session.", { brand }) }
                 </div>
-                <ThemeChoicePanel />
+                { /* --DTM-- Removed ability to change theme <ThemeChoicePanel /> */ }
                 <LayoutSwitcher
                     userId={this.state.userId}
                     displayName={this.state.displayName}

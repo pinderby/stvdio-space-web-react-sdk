@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /*
 Copyright 2015 - 2022 The Matrix.org Foundation C.I.C.
 
@@ -71,6 +72,8 @@ import { SwitchSpacePayload } from "../../dispatcher/payloads/SwitchSpacePayload
 import LegacyGroupView from "./LegacyGroupView";
 import { IConfigOptions } from "../../IConfigOptions";
 import LeftPanelLiveShareWarning from '../views/beacon/LeftPanelLiveShareWarning';
+// --DTM-- Added to access screen width for mobile
+import UIStore from "../../stores/UIStore";
 
 // We need to fetch each pinned message individually (if we don't already have it)
 // so each pinned message may trigger a request. Limit the number per room for sanity.
@@ -115,6 +118,8 @@ interface IState {
     useCompactLayout: boolean;
     activeCalls: Array<MatrixCall>;
     backgroundImage?: string;
+    // --DTM-- CHANGED Added to track left panel state for mobile
+    isLeftPanelOpen: boolean;
 }
 
 /**
@@ -137,6 +142,7 @@ class LoggedInView extends React.Component<IProps, IState> {
     protected compactLayoutWatcherRef: string;
     protected backgroundImageWatcherRef: string;
     protected resizer: Resizer;
+    protected isLeftPanelOpen: boolean;
 
     constructor(props, context) {
         super(props, context);
@@ -147,6 +153,8 @@ class LoggedInView extends React.Component<IProps, IState> {
             useCompactLayout: SettingsStore.getValue('useCompactLayout'),
             usageLimitDismissed: false,
             activeCalls: CallHandler.instance.getAllActiveCalls(),
+            // --DTM-- CHANGED Added to track left panel state for mobile
+            isLeftPanelOpen: false,
         };
 
         // stash the MatrixClient in case we log out before we are unmounted
@@ -617,11 +625,21 @@ class LoggedInView extends React.Component<IProps, IState> {
         }
     };
 
+    // --DTM-- Added method to handle collapsing left panel
+    protected toggleLeftPanel = () => {
+        this.setState({
+            isLeftPanelOpen: !this.state.isLeftPanelOpen,
+        });
+    };
+
     render() {
         let pageElement;
+        // --DTM-- set variable to store whether or not screen is mobile
+        const isMobile = (UIStore.instance.windowWidth <= 760) ? true : false;
 
         switch (this.props.page_type) {
             case PageTypes.RoomView:
+                // --DTM-- Passed down toggleLeftPanel so that the header would have access
                 pageElement = <RoomView
                     ref={this._roomView}
                     onRegistered={this.props.onRegistered}
@@ -631,6 +649,9 @@ class LoggedInView extends React.Component<IProps, IState> {
                     resizeNotifier={this.props.resizeNotifier}
                     justCreatedOpts={this.props.roomJustCreatedOpts}
                     forceTimeline={this.props.forceTimeline}
+                    toggleLeftPanel={this.toggleLeftPanel}
+                    isLeftPanelOpen={this.state.isLeftPanelOpen}
+                    isMobile={isMobile}
                 />;
                 break;
 
@@ -651,9 +672,17 @@ class LoggedInView extends React.Component<IProps, IState> {
             'mx_MatrixChat_wrapper': true,
             'mx_MatrixChat_useCompactLayout': this.state.useCompactLayout,
         });
+
         const bodyClasses = classNames({
             'mx_MatrixChat': true,
             'mx_MatrixChat--with-avatar': this.state.backgroundImage,
+        });
+
+        // --DTM-- Added to manage left panel state
+        const leftPanelClasses = classNames({
+            'mx_LeftPanel_outerWrapper': true,
+            'mx_LeftPanel_outerWrapper_mobile': isMobile,
+            'display-none': !this.state.isLeftPanelOpen && isMobile,
         });
 
         const audioFeedArraysForCalls = this.state.activeCalls.map((call) => {
@@ -672,7 +701,7 @@ class LoggedInView extends React.Component<IProps, IState> {
                 >
                     <ToastContainer />
                     <div className={bodyClasses}>
-                        <div className='mx_LeftPanel_outerWrapper'>
+                        <div className={leftPanelClasses}>
                             <LeftPanelLiveShareWarning isMinimized={this.props.collapseLhs || false} />
                             <div className='mx_LeftPanel_wrapper'>
                                 <BackdropPanel
